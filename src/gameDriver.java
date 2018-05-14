@@ -23,28 +23,35 @@ public class gameDriver {
 	FFFightPanel fightpanel;
 	Map supermap = new Map();
 	public Character pc = new Character(true, 1, 100, 100);
+	public Boolean whichmap = true;
 
-	private void main(String[] args) {
+	public static void main(String[] args) {
 		new gameDriver().start();
 	}
 
 	private void start() {
-		
+
 		frame = new JFrame("Welcome to Final Fantasy XX");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(mappanel);
 		frame.pack();
 		frame.setVisible(true);
-		mappanel.start();
-		
+		mappanel.start(pc);
+
 		mappanel.getInputMap().put(KeyStroke.getKeyStroke("LEFT"),"moveLeft");
 		mappanel.getActionMap().put("moveLeft",new AbstractAction(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				pc.moveSide(-10);
-				frame.repaint();
-				mappanel.findEnemies();
+				if(whichmap = true) {	
+					pc.moveSide(-10);
+					frame.repaint();
+					if(mappanel.findEnemies())
+						ChangetoFight();
+				}
+				else if(whichmap = false) {
+
+				}
 			}
 		});	
 
@@ -53,9 +60,15 @@ public class gameDriver {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				pc.moveSide(10);
-				frame.repaint();
-				mappanel.findEnemies();
+				if(whichmap = true) {	
+					pc.moveSide(10);
+					frame.repaint();
+					if(mappanel.findEnemies())
+						ChangetoFight();
+				}
+				else if(whichmap = false) {
+
+				}
 			}
 		});	
 
@@ -64,9 +77,15 @@ public class gameDriver {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				pc.moveUp(-10);
-				frame.repaint();
-				mappanel.findEnemies();
+				if(whichmap = true) {	
+					pc.moveUp(-10);
+					frame.repaint();
+					if(mappanel.findEnemies())
+						ChangetoFight();
+				}
+				else if(whichmap = false) {
+
+				}
 			}
 		});	
 
@@ -75,9 +94,15 @@ public class gameDriver {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				pc.moveUp(10);
-				frame.repaint();
-				mappanel.findEnemies();
+				if(whichmap = true) {	
+					pc.moveUp(10);
+					frame.repaint();
+					if(mappanel.findEnemies())
+						ChangetoFight();
+				}
+				else if(whichmap = false) {
+
+				}
 			}
 		});	
 
@@ -86,7 +111,14 @@ public class gameDriver {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ChangetoFight();
+				if(whichmap = true) {
+					ChangetoFight();
+					frame.repaint();
+				}
+				else {
+					ChangetoMap();
+					frame.repaint();
+				}
 			}
 		});	
 
@@ -100,8 +132,10 @@ public class gameDriver {
 		frame.setVisible(true);
 		frame.revalidate();
 		frame.repaint();
+		fightpanel.start(pc);
+		whichmap = false;
 	}
-	
+
 	public void ChangetoMap() {
 		frame.remove(fightpanel);
 		frame.add(savedpanel);
@@ -109,18 +143,12 @@ public class gameDriver {
 		frame.setVisible(true);
 		frame.revalidate();
 		frame.repaint();
+		mappanel.start(pc);
+		whichmap = true;
 	}
-	
+
 	public void gameend() {
 		JOptionPane.showMessageDialog(frame, "You died! Try fighting more monsters to level up and get stronger!");
-	}
-	
-	public FFPanel getPanel() {
-		return mappanel;
-	}
-	
-	public JFrame getFrame() {
-		return frame;
 	}
 
 }

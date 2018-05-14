@@ -21,6 +21,18 @@ public class FFFightPanel extends JPanel{
 	private static final int SIZE_PANEL = 600;
 	private static FFFightPanel panel = new FFFightPanel();
 	Fight superfight = new Fight();
+	private Character pc;
+
+	public FFFightPanel(){
+		this.setPreferredSize(new Dimension(this.SIZE_PANEL,SIZE_PANEL));
+
+	}
+
+	public void start(Character character) {
+		pc = character;
+		pc.setX(500);
+		pc.setY(300);
+	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -31,6 +43,6 @@ public class FFFightPanel extends JPanel{
 			e.printStackTrace();
 		}
 		g.drawImage(picture, 0, 0, SIZE_PANEL, SIZE_PANEL, null);
-		superfight.draw(g);
+		superfight.draw(pc, g);
 	}
 }

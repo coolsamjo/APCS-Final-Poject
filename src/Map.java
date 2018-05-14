@@ -10,8 +10,8 @@ public class Map {
 	}
 	
 	
-	public void draw(Graphics g) {
-		gameDriver.pc.draw(g);
+	public void draw(Character pc, Graphics g) {
+		pc.draw(g);
 	
 		}
 

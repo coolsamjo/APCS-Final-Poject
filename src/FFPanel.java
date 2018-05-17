@@ -29,60 +29,6 @@ public class FFPanel extends JPanel{
 	public void start(Character character) {
 		pc = character;
 		
-		
-//		this.getInputMap().put(KeyStroke.getKeyStroke("LEFT"),"moveLeft");
-//		this.getActionMap().put("moveLeft",new AbstractAction(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				pc.moveSide(-10);
-//				frame.repaint();
-//				findEnemies();
-//			}
-//		});	
-//
-//		this.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"),"moveRight");
-//		this.getActionMap().put("moveRight",new AbstractAction(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				pc.moveSide(10);
-//				frame.repaint();
-//				findEnemies();
-//			}
-//		});	
-//
-//		this.getInputMap().put(KeyStroke.getKeyStroke("UP"),"moveUp");
-//		this.getActionMap().put("moveUp",new AbstractAction(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				pc.moveUp(-10);
-//				frame.repaint();
-//				findEnemies();
-//			}
-//		});	
-//
-//		this.getInputMap().put(KeyStroke.getKeyStroke("DOWN"),"moveDown");
-//		this.getActionMap().put("moveDown",new AbstractAction(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				pc.moveUp(10);
-//				frame.repaint();
-//				findEnemies();
-//			}
-//		});	
-//
-//		this.getInputMap().put(KeyStroke.getKeyStroke("ENTER"),"select");
-//		this.getActionMap().put("select",new AbstractAction(){
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				frame.repaint();
-//			}
-//		});	
-//
 }
 
 	public boolean findEnemies() {

@@ -22,6 +22,7 @@ public class FFFightPanel extends JPanel{
 	private static FFFightPanel panel = new FFFightPanel();
 	Fight superfight = new Fight();
 	private Character pc;
+	private Character Fightpc;
 
 	public FFFightPanel(){
 		this.setPreferredSize(new Dimension(this.SIZE_PANEL,SIZE_PANEL));
@@ -29,20 +30,22 @@ public class FFFightPanel extends JPanel{
 	}
 
 	public void start(Character character) {
-		pc = character;
-		pc.setX(500);
-		pc.setY(300);
+	pc = character;
+	Fightpc = new Character(true, 1, 100, 100);
+	Fightpc.setX(500);
+	Fightpc.setY(300);
 	}
+	
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		try {
-			picture = ImageIO.read(new File ("src/arthas.jpg"));
+			picture = ImageIO.read(new File ("src/Arena.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		g.drawImage(picture, 0, 0, SIZE_PANEL, SIZE_PANEL, null);
-		superfight.draw(pc, g);
+		superfight.draw(Fightpc, g);
 	}
 }

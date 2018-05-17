@@ -11,8 +11,8 @@ public class Character {
 	private int Level;
 	private int Health;
 	private int Mana;
-	private int x;
-	private int y;
+	private int x = 250;
+	private int y = 560;
 	private boolean Type;
 	private Image pic;
 
@@ -67,7 +67,7 @@ public class Character {
 	public void draw(Graphics g) {
 		if(Type) {
 			try {
-				pic = ImageIO.read(new File ("src/arthas.jpg"));
+				pic = ImageIO.read(new File ("src/standinghero.gif"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -76,12 +76,15 @@ public class Character {
 		}
 		else if(Type == false) {
 			try {
-				pic = ImageIO.read(new File ("src/dungeon.png"));
+				if(Math.random()*4 < 2)
+				pic = ImageIO.read(new File ("src/StandingDemon.gif"));
+				else 
+					pic = ImageIO.read(new File ("src/StandingSkeleton.gif"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			g.drawImage(pic, 0, 0, null);
+			g.drawImage(pic, 50, 250, 200, 200, null);
 		}
 	}
 

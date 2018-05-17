@@ -20,10 +20,9 @@ public class gameDriver {
 	public JFrame frame;
 	public FFPanel mappanel = new FFPanel();
 	public FFPanel savedpanel;
-	FFFightPanel fightpanel;
+	public FFFightPanel fightpanel = new FFFightPanel();
 	Map supermap = new Map();
 	public Character pc = new Character(true, 1, 100, 100);
-	public Boolean whichmap = true;
 
 	public static void main(String[] args) {
 		new gameDriver().start();
@@ -42,16 +41,11 @@ public class gameDriver {
 		mappanel.getActionMap().put("moveLeft",new AbstractAction(){
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if(whichmap = true) {	
+			public void actionPerformed(ActionEvent arg0) {	
 					pc.moveSide(-10);
 					frame.repaint();
 					if(mappanel.findEnemies())
 						ChangetoFight();
-				}
-				else if(whichmap = false) {
-
-				}
 			}
 		});	
 
@@ -60,15 +54,10 @@ public class gameDriver {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(whichmap = true) {	
 					pc.moveSide(10);
 					frame.repaint();
 					if(mappanel.findEnemies())
 						ChangetoFight();
-				}
-				else if(whichmap = false) {
-
-				}
 			}
 		});	
 
@@ -76,16 +65,11 @@ public class gameDriver {
 		mappanel.getActionMap().put("moveUp",new AbstractAction(){
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if(whichmap = true) {	
+			public void actionPerformed(ActionEvent arg0) {	
 					pc.moveUp(-10);
 					frame.repaint();
 					if(mappanel.findEnemies())
 						ChangetoFight();
-				}
-				else if(whichmap = false) {
-
-				}
 			}
 		});	
 
@@ -94,15 +78,10 @@ public class gameDriver {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(whichmap = true) {	
 					pc.moveUp(10);
 					frame.repaint();
 					if(mappanel.findEnemies())
 						ChangetoFight();
-				}
-				else if(whichmap = false) {
-
-				}
 			}
 		});	
 
@@ -111,29 +90,68 @@ public class gameDriver {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(whichmap = true) {
 					ChangetoFight();
 					frame.repaint();
 				}
-				else {
-					ChangetoMap();
-					frame.repaint();
-				}
+		});	
+		
+		//HERE'S THE FIGHT PANEL INPUT MAPPING
+		fightpanel.getInputMap().put(KeyStroke.getKeyStroke("LEFT"),"Left");
+		fightpanel.getActionMap().put("Left",new AbstractAction(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {	
+					
 			}
 		});	
 
+		fightpanel.getInputMap().put(KeyStroke.getKeyStroke("RIGHT"),"Right");
+		fightpanel.getActionMap().put("Right",new AbstractAction(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});	
+
+		fightpanel.getInputMap().put(KeyStroke.getKeyStroke("UP"),"Up");
+		fightpanel.getActionMap().put("Up",new AbstractAction(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {	
+					
+			}
+		});	
+
+		fightpanel.getInputMap().put(KeyStroke.getKeyStroke("DOWN"),"Down");
+		fightpanel.getActionMap().put("Down",new AbstractAction(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				ChangetoMap();
+			}
+		});	
+
+		fightpanel.getInputMap().put(KeyStroke.getKeyStroke("ENTER"),"Enter");
+		fightpanel.getActionMap().put("Enter",new AbstractAction(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+					gameend();
+				}
+		});	
 	}
 
 	public void ChangetoFight() {
 		savedpanel = mappanel;
 		frame.remove(mappanel);
-		frame.add(fightpanel = new FFFightPanel());
+		frame.add(fightpanel);
 		frame.pack();
 		frame.setVisible(true);
 		frame.revalidate();
 		frame.repaint();
 		fightpanel.start(pc);
-		whichmap = false;
+		fightpanel.requestFocus();
 	}
 
 	public void ChangetoMap() {
@@ -143,12 +161,13 @@ public class gameDriver {
 		frame.setVisible(true);
 		frame.revalidate();
 		frame.repaint();
-		mappanel.start(pc);
-		whichmap = true;
+//		mappanel.start(pc);
+		mappanel.requestFocus();
 	}
 
 	public void gameend() {
 		JOptionPane.showMessageDialog(frame, "You died! Try fighting more monsters to level up and get stronger!");
+		frame.dispose();
 	}
 
 }
